@@ -25,7 +25,7 @@ if (isset($_REQUEST['registrarsesubmit'])) {
   } else {
     echo "el usuario ya esta en uso o no se han introducido todos los datos";
   }
-} elseif (isset($_REQUEST['loginsumbit'])) {
+} elseif (isset($_REQUEST['loginsubmit'])) {
 
   $usuario = $_POST['usuario'];
   $password = $_POST['password'];
@@ -42,7 +42,7 @@ if (isset($_REQUEST['registrarsesubmit'])) {
     $verify = password_verify($password, $row['contraseña']);
     //$loginsesion = 1224;
     if (count($row) > 0 && $verify) {
-      echo "hola";
+     
       //echo $_SESSION['qr'];
       //echo $_SESSION['consultalogin'];
       $_SESSION['consultalogin'] = $loginsesion;
@@ -106,7 +106,7 @@ if (isset($_REQUEST['registrarsesubmit'])) {
                     </label>
                     <input type="password" class="form-control" id="password" name="password" />
                   </div><br>
-                  <button type="submit" class="btn btn-primary" name="loginsumbit">
+                  <button type="submit" class="btn btn-primary" name="loginsubmit">
                     Submit
                   </button>
                 </form>

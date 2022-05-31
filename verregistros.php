@@ -17,45 +17,39 @@
  include_once ('conexionae.php');
 
                 $mysqli = new mysqli("localhost", $username, $password, $database);
-                $query = "SELECT e.NIF, e.NombreEmpleado, e.Puesto, r.FechaRegistro, a.NumeroAsistencia \n"
+                        $query = "SELECT `empleado`.`NombreEmpleado`, `registro`.`FechaRegistro`, `registro`.`HoraEntrada`, `registro`.`HoraSalida`\n"
 
-                        . "FROM empleado e\n"
-            
-                        . "LEFT JOIN registro r\n"
-            
-                        . "on e.NIF=r.NIF\n"
-            
-                        . "LEFT JOIN asistencia a\n"
-            
-                        . "on r.NIF = a.NIF\n"
-            
-                        . "ORDER BY r.FechaRegistro DESC";
-
+                        . "FROM `empleado` \n"
+                    
+                        . "	LEFT JOIN `registro` ON `registro`.`NIF` = `empleado`.`NIF`\n"
+                    
+                        . "    ORDER BY FechaRegistro DESC, HoraEntrada DESC";
 
                 echo '<table border="0" cellspacing="2" cellpadding="2"> 
                 <tr> 
-                    <td> <font face="Arial">NIF</font> </td> 
-                    <td> <font face="Arial">NombreEmpleado</font> </td> 
-                    <td> <font face="Arial">Puesto</font> </td> 
-                    <td> <font face="Arial">Fecha Registro</font> </td> 
-                    <td> <font face="Arial">Numero Asistencia</font> </td> 
+                    <td class="col-md-3" style="text-align:center ;"> <font face="Arial">Nombre del empleado</font> </td>
+                    <td class="col-md-3" style="text-align:center ;"> <font face="Arial">Fecha</font> </td>  
+                    <td class="col-md-3" style="text-align:center ;"> <font face="Arial">Hora de entrada</font> </td> 
+                    <td class="col-md-3" style="text-align:center ;"> <font face="Arial">Hora de salida</font> </td> 
+
+                    
                 </tr>';
 
                 if ($result = $mysqli->query($query)) {
                     while ($row = $result->fetch_assoc()) {
-                        $NIF = $row["NIF"];
-                        $NombreEmpleado = $row["NombreEmpleado"];
-                        $Puesto = $row["Puesto"];
-                        $FechaRegistro = $row["FechaRegistro"];
-                        $NumeroAsistencia = $row["NumeroAsistencia"];
-
+                        $nombreEmpleado = $row["NombreEmpleado"];
+                        $fecha = $row["FechaRegistro"];
+                        $horaEntrada = $row["HoraEntrada"];
+                        $horaSalida = $row["HoraSalida"];
+                        
                         echo '<tr> 
-                                <td>' . $NIF . '</td> 
-                                <td>' . $NombreEmpleado . '</td> 
-                                <td>' . $Puesto . '</td> 
-                                <td>' . $FechaRegistro . '</td>
-                                <td>' . $NumeroAsistencia .'</td> 
+                                <td style="background-color: aqua ;text-align:center;border-bottom:1pt solid black;">' . $nombreEmpleado . '</td> 
+                                <td style="background-color: bisque;text-align:center;border-bottom:1pt solid black;">' . $fecha . '</td> 
+                                <td style="background-color: aqua ;text-align:center;border-bottom:1pt solid black;">' . $horaEntrada . '</td> 
+                                <td style="background-color: bisque ;text-align:center;border-bottom:1pt solid black;">' . $horaSalida . '</td> 
+                                
                             </tr>';
+                            
                             // al parecer no hace falta poner e. o r. en el row para que coja el dato.
                     }
                     $result->free();
@@ -63,4 +57,4 @@
 ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
-</html>
+</html> 

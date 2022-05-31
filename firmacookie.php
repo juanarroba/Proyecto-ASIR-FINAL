@@ -30,11 +30,7 @@ session_start();
               <label for="dni" id="login-nombre">DNI</label>
               <input type="text" name="dni" id="dni" value="
             <?php
-            if (isset($_COOKIE['dni'])) {
-              echo  $_COOKIE['dni'];
-            } else {
-              //echo "DNI";
-            }
+            if (isset($_COOKIE['dni'])) {echo $_COOKIE['dni'];} else {}
             ?>" maxlength="9">
           </div>
           <div class="col-md-4" style="text-align:center ;">
