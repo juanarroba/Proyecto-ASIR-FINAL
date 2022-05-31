@@ -1,0 +1,11 @@
+.col-md-3, .col-md-2 {
+        background-color:darkgrey;
+        border: 1%;
+        border-style: solid;
+        border-color: black;
+        text-align: center;
+}
+
+body{
+    background-color: aquamarine;
+}
